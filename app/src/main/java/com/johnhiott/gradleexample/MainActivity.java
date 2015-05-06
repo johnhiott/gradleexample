@@ -4,14 +4,30 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    @InjectView(R.id.bugReports) TextView mBugReports;
+    @InjectView(R.id.apiKey) TextView mApiKeyTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
+
+        if (BuildConfig.SEND_BUG_REPORTS) {
+            mBugReports.setText(getString(R.string.bug_reports_enabled));
+        }else {
+            mBugReports.setText(getString(R.string.bug_reports_disabled));
+        }
+
+        mApiKeyTextView.setText(BuildConfig.DEV_API);
     }
 
 

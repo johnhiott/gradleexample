@@ -3,4 +3,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="bug_reports_enabled">Bug Reports Enabled</string>
+    <string name="bug_reports_disabled">Bug Reports Disabled</string>
 </resources>

@@ -11,10 +11,28 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    buildTypes {
+
+    signingConfigs {
         release {
+            storeFile file(System.env['KEY_PATH'])
+            storePassword System.env['STORE_PASSWORD']
+            keyAlias System.env['KEY_ALIAS']
+            keyPassword System.env['KEY_PASSWORD']
+        }
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField ("boolean", "SEND_BUG_REPORTS", "false")
+            buildConfigField ("String", "DEV_API", "\"http://dev.johnhiott.com/sample\"")
+        }
+        release {
+            buildConfigField ("boolean", "SEND_BUG_REPORTS", "true")
+            buildConfigField ("String", "DEV_API", "\"http://johnhiott.com/sample\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            zipAlignEnabled true
+            signingConfig signingConfigs.release
         }
     }
 }
